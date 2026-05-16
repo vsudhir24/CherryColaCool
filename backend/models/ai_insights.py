@@ -3,7 +3,7 @@ import json
 from database import get_db
 
 client = anthropic.Anthropic()  # uses ANTHROPIC_API_KEY env var
-
+#testing 
 def build_property_context(parcel_id: str) -> dict:
     """Pull all relevant data for a property to send to Claude."""
     conn = get_db()
