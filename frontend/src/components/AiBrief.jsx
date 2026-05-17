@@ -51,7 +51,7 @@ export default function AiBrief({ property }) {
         {brief && !loading && (
           <p className="text-sm leading-relaxed text-gray-200">{brief.explanation}</p>
         )}
-      </motion>
+      </div>
     </section>
   );
 }

@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import AiBrief from './AiBrief';
 import ScoreBadge from './ScoreBadge';
 import {
   getActionDescription,
@@ -83,6 +84,8 @@ export default function PropertyDetailPanel({ property, onClose }) {
               ))}
             </ul>
           </section>
+
+          <AiBrief property={property} />
 
           <section className="mt-6">
             <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-detroit-muted">
