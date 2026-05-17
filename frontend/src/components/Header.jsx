@@ -24,9 +24,6 @@ export default function Header({ stats }) {
         <Stat label="Tax delinquent" value={stats.taxDelinquent} />
       </div>
 
-      <div className="rounded-full border border-detroit-border bg-detroit-slate/60 px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-detroit-muted">
-        Demo data
-      </div>
     </header>
   );
 }

@@ -80,3 +80,12 @@ function filterMockProperties(properties, filters) {
 function sortByPriority(properties) {
   return [...properties].sort((a, b) => b.priorityScore - a.priorityScore);
 }
+
+/**
+ * AI-generated intervention brief (Gemini via backend).
+ * @param {object} property
+ */
+export async function fetchAiExplanation(property) {
+  const { data } = await client.post('/api/ai/explain', { property });
+  return data;
+}

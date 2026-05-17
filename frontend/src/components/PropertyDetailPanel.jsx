@@ -104,15 +104,6 @@ export default function PropertyDetailPanel({ property, onClose }) {
             </div>
           </section>
         </div>
-
-        <div className="border-t border-detroit-border p-4">
-          <button type="button" className="btn-primary w-full">
-            Add to intervention queue
-          </button>
-          <p className="mt-2 text-center text-[10px] text-detroit-muted">
-            Queue integration coming with backend
-          </p>
-        </div>
       </aside>
     </>
   );

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
+from services.gemini_service import explain_property
 from services.property_service import get_properties
 
 app = Flask(__name__)
@@ -46,6 +47,17 @@ def api_properties():
         return jsonify({"error": str(exc)}), 503
 
     return jsonify(properties)
+
+
+@app.route("/api/ai/explain", methods=["POST"])
+def api_ai_explain():
+  body = request.get_json(silent=True) or {}
+  property_data = body.get("property") or body
+  if not property_data.get("address"):
+    return jsonify({"error": "property object with address is required"}), 400
+
+  result = explain_property(property_data)
+  return jsonify(result)
 
 
 if __name__ == "__main__":
