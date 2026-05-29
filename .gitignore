@@ -3,8 +3,12 @@ dist/
 build/
 .env
 .env.local
+.env.production
 __pycache__/
 *.pyc
 .venv/
 venv/
 .DS_Store
+.firebase/
+.firebaserc
+backend/data/raw/

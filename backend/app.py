@@ -1,11 +1,33 @@
+import os
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from dotenv import load_dotenv
 
 from services.gemini_service import explain_property
 from services.property_service import get_properties
 
+load_dotenv()
+
 app = Flask(__name__)
-CORS(app)
+
+def _configure_cors(application: Flask) -> None:
+    """Apply CORS to all routes (required for Firebase -> Cloud Run)."""
+    if os.getenv("CORS_ALLOW_ALL", "").lower() in ("1", "true", "yes"):
+        CORS(application)
+        return
+
+    origins = os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173,https://cherrycolacool.web.app,https://cherrycolacool.firebaseapp.com",
+    )
+    CORS(
+        application,
+        origins=[origin.strip() for origin in origins.split(",") if origin.strip()],
+    )
+
+
+_configure_cors(app)
 
 
 def _parse_bool(value):
@@ -23,6 +45,11 @@ def _parse_int(value):
 @app.route("/")
 def home():
     return jsonify({"message": "Detroit Blight Prioritizer backend is running"})
+
+
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"})
 
 
 @app.route("/api/properties")
@@ -61,4 +88,6 @@ def api_ai_explain():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    port = int(os.getenv("PORT", "8000"))
+    debug = os.getenv("FLASK_DEBUG", "false").lower() in ("1", "true", "yes")
+    app.run(debug=debug, host="0.0.0.0", port=port)

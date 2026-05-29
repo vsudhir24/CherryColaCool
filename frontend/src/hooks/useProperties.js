@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { fetchProperties } from '../services/api';
+import { fetchProperties, formatApiError, loadApiConfig } from '../services/api';
 import { DEFAULT_FILTERS } from './usePropertyFilters';
 
 export function useProperties(filters) {
@@ -14,7 +14,8 @@ export function useProperties(filters) {
       const data = await fetchProperties(filters);
       setProperties(data);
     } catch (err) {
-      setError(err?.message ?? 'Failed to load properties');
+      const { apiBaseUrl } = await loadApiConfig().catch(() => ({ apiBaseUrl: '' }));
+      setError(formatApiError(err, apiBaseUrl));
       setProperties([]);
     } finally {
       setLoading(false);
