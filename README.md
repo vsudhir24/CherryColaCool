@@ -1,5 +1,7 @@
 # Detroit Blight Prioritizer
 
+🌐 Live: https://cherrycolacool.web.app
+
 A full-stack data visualization and prioritization platform designed to help identify and rank blight-related issues across Detroit neighborhoods using public datasets, geospatial analysis, and weighted scoring.
 
 Built with a FastAPI backend, React frontend, SQLite/Postgres-compatible data layer, and interactive mapping/visualization tooling.
